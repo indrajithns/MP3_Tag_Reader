@@ -21,7 +21,7 @@ it will print all the available commands that can be used with this binary file
 
 To modify title imformation  and view those information 
 ```
-./a.out -t "Saidas" sample.mp3 
+./a.out -t "newname" sample.mp3 
 ./a.out sample.mp3
 ```
 
