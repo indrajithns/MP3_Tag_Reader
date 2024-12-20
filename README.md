@@ -114,13 +114,13 @@ You can replace `<new_title>`, `<new_artist>`, `<new_album>`, etc., with the new
 To display help information about the available options and usage:
 
 ```bash
-./mp3tag -help
+./mp3tag -h song.mp3
 ```
 
 To view the current version of the program:
 
 ```bash
-./mp3tag -version
+./mp3tag -v
 ```
 
 ## Example
