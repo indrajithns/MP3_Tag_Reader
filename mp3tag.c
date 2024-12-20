@@ -1,45 +1,68 @@
+/*
+ * File: mp3tag.c
+ * Description: This is the entry point for the MP3 metadata editor program. 
+ *              The program allows users to view or modify MP3 metadata 
+ *              such as title, artist, album, year, genre, etc.
+ * 
+ * Features:
+ *   - Displays help information for program usage.
+ *   - Reads and prints MP3 metadata tags.
+ *   - Allows modification of specific metadata tags.
+ *   - Prints the current version of the program.
+ * 
+ * Functions:
+ *   - main: Handles user input, determines the operation, and invokes 
+ *           corresponding functions for metadata operations.
+*/
+
 #include <stdio.h>
-#include<string.h>
+#include <string.h>
 #include <ctype.h>
 #include <stdlib.h>
 #include "common.h"
 #include "type.h"
 #include "edit.h"
 
-int main(int argc, char * argv[])
+// Main function: Entry point for the MP3 metadata editor
+int main(int argc, char *argv[])
 {
-		MP3Info mp3Info;
-		if(argc > 1)
-		{
-				switch(check_operation(argv))
-				{
-						case e_help:
-								print_help();
-								break;
+    MP3Info mp3Info; // Structure to hold MP3 metadata information
 
-						case e_file:
-								if(find_meta(argc, argv[1], &mp3Info) == e_success)
-										print_tag_data(&mp3Info);
-								break;
+    if (argc > 1)
+    {
+        // Determine the operation based on the input arguments
+        switch (check_operation(argv))
+        {
+            case e_help: // Help option
+                print_help();
+                break;
 
-						case e_option:
-								if(do_option(argc,argv, &mp3Info) == e_failure)
-								{		print_help();}
-								break;
-						case e_ver:
-								printf("Vesrion 1.1\n");
-								break;
+            case e_file: // Display metadata of an MP3 file
+                if (find_meta(argc, argv[1], &mp3Info) == e_success)
+                    print_tag_data(&mp3Info);
+                break;
 
-						default:
-								printf("Invalid Option !!!'%s'", argv[1]);
-								print_help();
-								break;
-				}
+            case e_option: // Perform metadata modification
+                if (do_option(argc, argv, &mp3Info) == e_failure)
+                {
+                    print_help();
+                }
+                break;
 
-		}
-		else
-		{
-				printf("Invalid Option !!!\n");
-				print_help();
-		}
+            case e_ver: // Display version information
+                printf("Version 1.1\n");
+                break;
+
+            default: // Invalid option
+                printf("Invalid Option !!! '%s'\n", argv[1]);
+                print_help();
+                break;
+        }
+    }
+    else
+    {
+        // No valid input arguments provided
+        printf("Invalid Option !!!\n");
+        print_help();
+    }
 }
